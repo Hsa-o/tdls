@@ -51,16 +51,16 @@
 
     input { 
       flex: 1;
-      padding: 10px; 
+      padding: 8px; 
       border-radius: 8px; 
       border: 1px solid #555; 
-      font-size: 15px;
+      font-size: 14px;
       background: #2c2c2c;
       color: #f5f5f5;
     }
 
     button { 
-      padding: 10px 14px; 
+      padding: 8px 12px; 
       border: none; 
       border-radius: 8px; 
       background: #3498db; 
@@ -68,7 +68,6 @@
       font-weight: bold;
       cursor: pointer; 
       transition: 0.2s;
-      font-size: 14px;
     }
 
     button:hover { background: #2980b9; }
@@ -86,9 +85,9 @@
       justify-content: space-between; 
       align-items: center;
       background: #2a2a2a;
-      padding: 10px 12px;
+      padding: 8px 10px;
       border-radius: 8px;
-      font-size: 15px;
+      font-size: 14px;
       transition: 0.2s;
       color: #ddd;
     }
@@ -100,7 +99,7 @@
     .remover { 
       background: crimson; 
       border: none; 
-      padding: 6px 10px; 
+      padding: 5px 8px; 
       border-radius: 6px; 
       cursor: pointer; 
       color: white; 
@@ -112,31 +111,16 @@
       background: darkred;
     }
 
-    /* 📱 Responsividade para tablets e celulares */
-    @media (max-width: 1024px) {
-      .container {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      }
-    }
-
-    @media (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
+    /* Responsividade */
+    @media (max-width: 768px) {
       h1 {
         font-size: 22px;
-        margin-bottom: 15px;
-      }
-      .container {
-        grid-template-columns: 1fr; /* apenas 1 coluna no celular */
-        gap: 15px;
       }
       .dia {
         padding: 12px;
       }
-      input { font-size: 14px; padding: 8px; }
-      button { font-size: 13px; padding: 8px 12px; }
-      li { font-size: 14px; padding: 8px 10px; }
+      input { font-size: 12px; }
+      button { font-size: 12px; padding: 6px 10px; }
     }
   </style>
 </head>
