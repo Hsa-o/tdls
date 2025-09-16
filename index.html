@@ -21,7 +21,7 @@
 
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: 1fr 1fr;
       gap: 20px;
       max-width: 1400px;
       margin: auto;
@@ -50,7 +50,7 @@
       margin-bottom: 12px;
     }
 
-    input, select {
+    input {
       padding: 8px;
       border-radius: 8px;
       border: 1px solid #555;
@@ -112,15 +112,31 @@
     }
 
     @media (max-width: 768px) {
+      .container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 0 10px;
+      }
+
       h1 { font-size: 22px; }
-      .dia { padding: 12px; }
-      input, select { font-size: 12px; }
-      button { font-size: 12px; padding: 6px 10px; }
+      h2 { font-size: 18px; }
+      .dia { padding: 16px; border-radius: 12px; width: 100%; }
+      input, button { font-size: 14px; width: 100%; }
+      li {
+        font-size: 13px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .remover {
+        align-self: flex-end;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Lista 1</h1>
+  <h1>🌙 To Do List Semanal</h1>
   <div class="container" id="app"></div>
 
   <script>
@@ -140,11 +156,6 @@
           <div class="input-area">
             <input id="input-${dia}" placeholder="Nova tarefa"/>
             <input type="time" id="hora-${dia}" />
-            <select id="prioridade-${dia}">
-              <option value="Alta">Alta</option>
-              <option value="Média">Média</option>
-              <option value="Baixa">Baixa</option>
-            </select>
             <button onclick="adicionar('${dia}')">Adicionar</button>
           </div>
           <ul id="lista-${dia}"></ul>
@@ -154,13 +165,11 @@
     function adicionar(dia) {
       const input = document.getElementById("input-" + dia);
       const hora = document.getElementById("hora-" + dia).value;
-      const prioridade = document.getElementById("prioridade-" + dia).value;
 
       if (input.value.trim() !== "" && hora !== "") {
         tarefas[dia].push({
           texto: input.value,
-          hora: hora,
-          prioridade: prioridade
+          hora: hora
         });
         input.value = "";
         document.getElementById("hora-" + dia).value = "";
@@ -182,13 +191,8 @@
 
         tarefas[dia].forEach((tarefa, index) => {
           const li = document.createElement("li");
-
-          let icone = "⚠";
-          if (tarefa.prioridade === "Média") icone = "🔔";
-          else if (tarefa.prioridade === "Baixa") icone = "✅";
-
           li.innerHTML = `
-            <span>${icone} <strong>${tarefa.hora}</strong> - ${tarefa.texto} <em>(${tarefa.prioridade})</em></span>
+            <span><strong>${tarefa.hora}</strong> - ${tarefa.texto}</span>
             <button class="remover" onclick="remover('${dia}', ${index})">x</button>
           `;
           lista.appendChild(li);
