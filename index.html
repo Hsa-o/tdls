@@ -5,17 +5,20 @@
   <title>To Do List Semanal</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Roboto', 'Segoe UI', sans-serif;
       margin: 0;
       padding: 20px;
       background: #121212;
       color: #e0e0e0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     h1 {
       text-align: center;
       margin-bottom: 30px;
-      font-size: 28px;
+      font-size: 30px;
       color: #ffffff;
     }
 
@@ -23,28 +26,29 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 28px;
-      max-width: 600px;
-      margin: auto;
+      gap: 32px;
+      width: 100%;
+      max-width: 500px;
     }
 
     .dia {
       background: #1e1e1e;
-      border-radius: 15px;
-      padding: 20px;
+      border-radius: 16px;
+      padding: 24px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.6);
       width: 100%;
-      min-height: 220px;
+      min-height: 260px;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      justify-content: space-between;
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 12px;
-      font-size: 20px;
+      margin-bottom: 16px;
+      font-size: 22px;
       color: #f5f5f5;
+      font-weight: 500;
     }
 
     .input-area {
@@ -52,26 +56,26 @@
       flex-direction: column;
       gap: 12px;
       width: 100%;
-      margin-bottom: 16px;
     }
 
     input {
-      padding: 10px;
-      border-radius: 8px;
+      padding: 12px;
+      border-radius: 10px;
       border: 1px solid #555;
-      font-size: 15px;
+      font-size: 16px;
       background: #2c2c2c;
       color: #f5f5f5;
       width: 100%;
     }
 
     button {
-      padding: 10px 12px;
+      padding: 12px;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       background: #3498db;
       color: white;
       font-weight: bold;
+      font-size: 16px;
       cursor: pointer;
       transition: transform 0.1s ease;
       width: 100%;
@@ -88,7 +92,7 @@
     ul {
       list-style: none;
       padding: 0;
-      margin-top: 10px;
+      margin-top: 16px;
       width: 100%;
     }
 
@@ -100,7 +104,7 @@
       background: #2a2a2a;
       padding: 10px 12px;
       border-radius: 8px;
-      font-size: 15px;
+      font-size: 16px;
       color: #ddd;
       opacity: 0;
       transform: translateY(10px);
@@ -133,7 +137,7 @@
       border-radius: 6px;
       cursor: pointer;
       color: white;
-      font-size: 13px;
+      font-size: 14px;
       transition: 0.2s;
     }
 
@@ -141,13 +145,13 @@
       background: darkred;
     }
 
-    @media (max-width: 768px) {
-      h1 { font-size: 24px; }
-      h2 { font-size: 18px; }
-      .dia { padding: 18px; min-height: 240px; }
-      input, button { font-size: 14px; }
+    @media (max-width: 600px) {
+      h1 { font-size: 26px; }
+      h2 { font-size: 20px; }
+      .dia { padding: 20px; min-height: 280px; }
+      input, button { font-size: 15px; }
       li {
-        font-size: 14px;
+        font-size: 15px;
         flex-direction: column;
         align-items: flex-start;
         gap: 6px;
