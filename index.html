@@ -20,10 +20,11 @@
     }
 
     .container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       gap: 20px;
-      max-width: 1400px;
+      max-width: 600px;
       margin: auto;
     }
 
@@ -32,8 +33,10 @@
       border-radius: 15px;
       padding: 15px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      width: 100%;
       display: flex;
       flex-direction: column;
+      align-items: center;
     }
 
     h2 {
@@ -47,6 +50,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      width: 100%;
       margin-bottom: 12px;
     }
 
@@ -57,6 +61,7 @@
       font-size: 14px;
       background: #2c2c2c;
       color: #f5f5f5;
+      width: 100%;
     }
 
     button {
@@ -67,16 +72,23 @@
       color: white;
       font-weight: bold;
       cursor: pointer;
-      transition: 0.2s;
+      transition: transform 0.1s ease;
+      width: 100%;
     }
 
-    button:hover { background: #2980b9; }
+    button:hover {
+      background: #2980b9;
+    }
+
+    button:active {
+      transform: scale(0.97);
+    }
 
     ul {
       list-style: none;
       padding: 0;
       margin-top: 10px;
-      flex-grow: 1;
+      width: 100%;
     }
 
     li {
@@ -88,12 +100,29 @@
       padding: 8px 10px;
       border-radius: 8px;
       font-size: 14px;
-      transition: 0.2s;
       color: #ddd;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: aparecer 0.4s ease forwards;
     }
 
     li:hover {
       background: #333333;
+      transform: scale(1.02);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    @keyframes aparecer {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .removendo {
+      opacity: 0;
+      transform: translateX(20px);
+      transition: all 0.3s ease;
     }
 
     .remover {
@@ -112,17 +141,10 @@
     }
 
     @media (max-width: 768px) {
-      .container {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-        padding: 0 10px;
-      }
-
       h1 { font-size: 22px; }
       h2 { font-size: 18px; }
-      .dia { padding: 16px; border-radius: 12px; width: 100%; }
-      input, button { font-size: 14px; width: 100%; }
+      .dia { padding: 16px; border-radius: 12px; }
+      input, button { font-size: 14px; }
       li {
         font-size: 13px;
         flex-direction: column;
@@ -178,8 +200,13 @@
     }
 
     function remover(dia, index) {
-      tarefas[dia].splice(index, 1);
-      renderizar();
+      const lista = document.getElementById("lista-" + dia);
+      const item = lista.children[index];
+      item.classList.add("removendo");
+      setTimeout(() => {
+        tarefas[dia].splice(index, 1);
+        renderizar();
+      }, 300);
     }
 
     function renderizar() {
