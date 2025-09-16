@@ -60,7 +60,13 @@
       width: 100%;
     }
 
-    input {
+    .horarios {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+    }
+
+    input[type="text"], input[type="time"] {
       padding: 14px;
       border-radius: 10px;
       border: 1px solid #555;
@@ -183,8 +189,11 @@
         <div class="dia">
           <h2>${dia}</h2>
           <div class="input-area">
-            <input id="input-${dia}" placeholder="Nova tarefa"/>
-            <input type="time" id="hora-${dia}" />
+            <input id="input-${dia}" type="text" placeholder="Nova tarefa"/>
+            <div class="horarios">
+              <input type="time" id="inicio-${dia}" />
+              <input type="time" id="fim-${dia}" placeholder="Fim (opcional)" />
+            </div>
             <button onclick="adicionar('${dia}')">Adicionar</button>
           </div>
           <ul id="lista-${dia}"></ul>
@@ -193,15 +202,18 @@
 
     function adicionar(dia) {
       const input = document.getElementById("input-" + dia);
-      const hora = document.getElementById("hora-" + dia).value;
+      const inicio = document.getElementById("inicio-" + dia).value;
+      const fim = document.getElementById("fim-" + dia).value;
 
-      if (input.value.trim() !== "" && hora !== "") {
+      if (input.value.trim() !== "" && inicio !== "") {
         tarefas[dia].push({
           texto: input.value,
-          hora: hora
+          inicio: inicio,
+          fim: fim || null
         });
         input.value = "";
-        document.getElementById("hora-" + dia).value = "";
+        document.getElementById("inicio-" + dia).value = "";
+        document.getElementById("fim-" + dia).value = "";
         renderizar();
       }
     }
@@ -221,12 +233,16 @@
         const lista = document.getElementById("lista-" + dia);
         lista.innerHTML = "";
 
-        tarefas[dia].sort((a, b) => a.hora.localeCompare(b.hora));
+        tarefas[dia].sort((a, b) => a.inicio.localeCompare(b.inicio));
 
         tarefas[dia].forEach((tarefa, index) => {
+          const horario = tarefa.fim
+            ? `${tarefa.inicio}–${tarefa.fim}`
+            : `${tarefa.inicio}`;
+
           const li = document.createElement("li");
           li.innerHTML = `
-            <span><strong>${tarefa.hora}</strong> - ${tarefa.texto}</span>
+            <span><strong>${horario}</strong> → ${tarefa.texto}</span>
             <button class="remover" onclick="remover('${dia}', ${index})">x</button>
           `;
           lista.appendChild(li);
